@@ -17,7 +17,7 @@
         android:layout_marginTop="200dp"
         android:gravity="center"
         android:text="Cadastro Usuário"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="#212121"/>
 
@@ -69,7 +69,7 @@
         android:backgroundTint="#FFC107"
         android:text="Cadastrar"
         android:textColor="#263238"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
 </LinearLayout>
 
