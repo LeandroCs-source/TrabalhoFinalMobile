@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="#263238"
     android:orientation="vertical"
     tools:context=".main.CadastroUsuarioActivity">
 
@@ -17,9 +17,9 @@
         android:layout_marginTop="200dp"
         android:gravity="center"
         android:text="Cadastro Usuário"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="#212121"/>
+        android:textColor="#FFC107"
+        android:textSize="32sp"
+        android:textStyle="bold" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -36,7 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="E-mail"
-            android:padding="20dp" />
+            android:padding="20dp"
+            android:textColorHint="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,21 +56,24 @@
             android:layout_height="wrap_content"
             android:hint="Senha"
             android:inputType="textPassword"
-            android:padding="20dp"/>
+            android:padding="20dp"
+            android:textColorHint="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnCadastrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="40dp"
         android:backgroundTint="#FFC107"
+        android:fontFamily="@font/roboto_black"
         android:text="Cadastrar"
-        android:textColor="#263238"
-        android:textSize="20dp" />
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:cornerRadius="16dp" />
 
 </LinearLayout>
 
