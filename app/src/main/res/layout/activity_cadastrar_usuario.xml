@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#F5F5F5"
     android:orientation="vertical"
-    tools:context=".main.CadastroUsuarioActivity">
+    tools:context=".main.CadastrarUsuarioActivity">
 
 
     <TextView
@@ -63,9 +63,8 @@
         android:id="@+id/btnCadastrarUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginHorizontal="70dp"
         android:backgroundTint="#FFC107"
         android:text="Cadastrar"
         android:textColor="#263238"

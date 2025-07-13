@@ -13,10 +13,13 @@
         android:theme="@style/Theme.TrabalhoFinalMobile"
         tools:targetApi="31">
         <activity
-            android:name=".main.CadastroLivroActivity"
+            android:name=".main.EditarCadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".main.CadastroUsuarioActivity"
+            android:name=".main.CadastrarLivroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.CadastrarUsuarioActivity"
             android:exported="false" />
         <activity
             android:name=".main.InicialActivity"

@@ -5,11 +5,8 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.UnderlineSpan
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.trabalhofinalmobile.R
 import com.example.trabalhofinalmobile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -53,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.textCadastroUsuario.setOnClickListener{
-            val intent = Intent(this, CadastroUsuarioActivity::class.java)
+            val intent = Intent(this, CadastrarUsuarioActivity::class.java)
             startActivity(intent)
         }
     }
