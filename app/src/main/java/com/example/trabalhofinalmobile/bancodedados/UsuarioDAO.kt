@@ -23,7 +23,7 @@ class UsuarioDAO(context: Context) {
         return retorno
     }
 
-    fun autentica( usuario:String, senha:String): Boolean{
+    fun autenticar( usuario:String, senha:String): Boolean{
 
         val sql = "select * from usuario where usuario = '${usuario}' and senha ='${senha}';"
 
