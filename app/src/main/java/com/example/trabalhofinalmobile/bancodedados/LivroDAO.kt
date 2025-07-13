@@ -70,7 +70,7 @@ class LivroDAO (context: Context) {
                 listaLivro.add(Livro(idLivro, titulo, autor, avaliacao, genero))
             }
         }catch (e:SQLException){
-            Log.i("info_bd", "Erro ao listar livros")
+            Log.i("info_bd", "Erro ao listar livros!")
         }
         return listaLivro
     }

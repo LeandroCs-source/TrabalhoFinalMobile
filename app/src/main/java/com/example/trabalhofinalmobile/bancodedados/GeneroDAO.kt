@@ -39,7 +39,7 @@ class GeneroDAO(context: Context) {
                 listaGenero.add(Genero(idGenero, genero))
             }
         }catch (e:SQLException){
-            Log.i("info_bd", "Erro ao listar gêneros")
+            Log.i("info_bd", "Erro ao listar gêneros!")
         }
         return listaGenero
     }
