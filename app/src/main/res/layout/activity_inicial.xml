@@ -16,9 +16,9 @@
         android:layout_marginTop="120dp"
         android:fontFamily="@font/roboto_black"
         android:gravity="center"
-        android:text="Estante Inteligente"
+        android:text="Estante Inteligente®"
         android:textColor="#FFC107"
-        android:textSize="40sp"
+        android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
@@ -46,10 +46,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Bem-Vindo"
+        android:text="Seja Bem-Vindo!"
         android:textColor="#FFC107"
         android:textSize="40sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
 
 

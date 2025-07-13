@@ -2,6 +2,9 @@ package com.example.trabalhofinalmobile.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.UnderlineSpan
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -19,6 +22,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val texto = "Primeiro acesso? Cadastre aqui"
+        val spannable = SpannableString(texto)
+
+        val inicio = texto.indexOf("Cadastre aqui")
+        val fim = inicio + "Cadastre aqui".length
+
+        spannable.setSpan(
+            UnderlineSpan(),
+            inicio,
+            fim,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        binding.textCadastroUsuario.text = spannable
 
         binding.btnLogin.setOnClickListener {
             val email = binding.textEmailLogin.text.toString().trim()
