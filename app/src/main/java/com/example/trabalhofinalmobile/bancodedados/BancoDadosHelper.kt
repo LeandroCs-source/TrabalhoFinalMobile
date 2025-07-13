@@ -32,15 +32,16 @@ class BancoDadosHelper (context:Context):SQLiteOpenHelper (context, "EstanteInte
             db?.execSQL(sqlUsuario)
             db?.execSQL(sqlGenero)
             db?.execSQL(sqlLivro)
+
+            // Inserir gêneros iniciais
+            val generosIniciais = listOf("Romance", "Fantasia", "Ficção Científica", "Suspense", "Aventura")
+            generosIniciais.forEach { genero ->
+                db?.execSQL("insert into genero (nomeGenero) values ('$genero')")
+            }
+
         }catch (e:SQLException){
             e.printStackTrace()
             Log.i("Info_bd", "Erro ao criar tabelas")
-        }
-
-        // Inserir gêneros iniciais
-        val generosIniciais = listOf("Romance", "Fantasia", "Ficção Científica", "Suspense", "Aventura")
-        generosIniciais.forEach { genero ->
-            db?.execSQL("insert into genero (nomeGenero) values ('$genero')")
         }
 
     }

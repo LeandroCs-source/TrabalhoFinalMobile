@@ -13,7 +13,7 @@ class LivroDAO (context: Context) {
     fun salvar(livro: Livro):Boolean{
 
         var retorno = false
-        val sql = "insert into livro values (null, '${livro.titulo}, '${livro.autor}, ${livro.avaliacao}, ${livro.idGenero});"
+        val sql = "insert into livro values (null, '${livro.titulo}', '${livro.autor}', ${livro.avaliacao}, ${livro.idGenero});"
 
         try {
             escrita.execSQL(sql)
@@ -70,7 +70,7 @@ class LivroDAO (context: Context) {
                 listaLivro.add(Livro(idLivro, titulo, autor, avaliacao, genero))
             }
         }catch (e:SQLException){
-            Log.i("info_bd", "Erro ao selecionar")
+            Log.i("info_bd", "Erro ao listar livros")
         }
         return listaLivro
     }
