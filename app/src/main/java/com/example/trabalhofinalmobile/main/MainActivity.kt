@@ -8,21 +8,23 @@ import android.text.style.UnderlineSpan
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trabalhofinalmobile.databinding.ActivityMainBinding
+import com.example.trabalhofinalmobile.database.UserDatabaseHelper
 
 class MainActivity : AppCompatActivity() {
 
-    val binding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
-    }
-
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var dbHelper: UserDatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        dbHelper = UserDatabaseHelper(this)
+
+        // Texto com sublinhado
         val texto = "Primeiro acesso? Cadastre aqui"
         val spannable = SpannableString(texto)
-
         val inicio = texto.indexOf("Cadastre aqui")
         val fim = inicio + "Cadastre aqui".length
 
@@ -41,15 +43,21 @@ class MainActivity : AppCompatActivity() {
 
             if (email.isEmpty() || senha.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
-            } else if (email == "admin@livros.com" && senha == "1234") {
-                Toast.makeText(this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
             } else {
-                Toast.makeText(this, "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show()
+                val loginValido = dbHelper.verificarCredenciais(email, senha)
+
+                if (loginValido) {
+                    Toast.makeText(this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, EditarCadastroActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(this, "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
-        binding.textCadastroUsuario.setOnClickListener{
+
+        // Clique para ir para tela de cadastro
+        binding.textCadastroUsuario.setOnClickListener {
             val intent = Intent(this, CadastrarUsuarioActivity::class.java)
             startActivity(intent)
         }
