@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (loginValido) {
                     Toast.makeText(this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, EditarCadastroActivity::class.java))
+                    startActivity(Intent(this, AcervoActivity::class.java))
                     finish()
                 } else {
                     Toast.makeText(this, "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show()

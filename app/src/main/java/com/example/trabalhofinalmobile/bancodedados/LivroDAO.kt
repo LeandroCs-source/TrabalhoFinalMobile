@@ -55,7 +55,9 @@ class LivroDAO (context: Context) {
     fun listar():List<Livro>{
 
         val listaLivro = mutableListOf<Livro>()
-        val sql = "select * from livro;"
+        val sql = " select livro.idLivro, livro.titulo, livro.autor, livro.avaliacao, livro.idGenero, genero.nomeGenero " +
+                "from livro inner join genero on livro.idGenero = genero.idGenero;"
+
 
         try{
             val cursor = leitura.rawQuery(sql, null)
@@ -66,8 +68,9 @@ class LivroDAO (context: Context) {
                 val autor = cursor.getString(2)
                 val avaliacao = cursor.getInt(3)
                 val genero = cursor.getInt(4)
+                val nomeGenero = cursor.getString(5)
 
-                listaLivro.add(Livro(idLivro, titulo, autor, avaliacao, genero))
+                listaLivro.add(Livro(idLivro, titulo, autor, avaliacao, genero, nomeGenero))
             }
         }catch (e:SQLException){
             Log.i("info_bd", "Erro ao listar livros!")
