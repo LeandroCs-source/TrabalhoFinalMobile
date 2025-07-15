@@ -1,5 +1,6 @@
 package com.example.trabalhofinalmobile.main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -7,9 +8,12 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -30,6 +34,9 @@ class AcervoActivity : AppCompatActivity() {
     private lateinit var editBuscarAutor: EditText
     private lateinit var recyclerView: RecyclerView
     private lateinit var livroAdapter: LivroAdapter
+    private lateinit var botaoAdicionar: Button
+    private lateinit var cadastrarLivroLauncher: ActivityResultLauncher<Intent>
+
 
     private var listaTodosLivros: List<Livro> = listOf()
 
@@ -48,6 +55,7 @@ class AcervoActivity : AppCompatActivity() {
         spinnerGenero = findViewById(R.id.spinnerGenero)
         editBuscarAutor = findViewById(R.id.editBuscarAutor)
         recyclerView = findViewById(R.id.recyclerLivros)
+        botaoAdicionar = findViewById(R.id.btnCadastrarAcervo)
 
         // Inicializar adapter
         livroAdapter = LivroAdapter(mutableListOf())
@@ -56,6 +64,7 @@ class AcervoActivity : AppCompatActivity() {
 
         carregarGeneros()
         carregarLivros()
+
 
         // Filtro por autor conforme digita
         editBuscarAutor.addTextChangedListener(object : TextWatcher {
@@ -73,8 +82,22 @@ class AcervoActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}//caso nada seja selecionado
         }
 
-        startActivity(Intent(this, CadastrarLivroActivity::class.java))
+
+        botaoAdicionar.setOnClickListener {
+            val intent = Intent(this, CadastrarLivroActivity::class.java)
+            cadastrarLivroLauncher.launch(intent)
+        }
+
+        cadastrarLivroLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // Recarrega a lista após o retorno da tela de cadastro
+                carregarLivros()
+            }
+        }
     }
+
 
     private fun carregarGeneros() {
         val generoDAO = GeneroDAO(this)
@@ -85,12 +108,15 @@ class AcervoActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, nomesGeneros)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerGenero.adapter = adapter
+
+        // Garante que "Todos os Gêneros" esteja selecionado e chama os filtros
+        spinnerGenero.setSelection(0)
     }
 
     private fun carregarLivros() {
         val livroDAO = LivroDAO(this)
         listaTodosLivros = livroDAO.listar() // ou seu método para buscar todos
-        aplicarFiltros()
+        //aplicarFiltros()
     }
 
     private fun aplicarFiltros() {
@@ -105,4 +131,5 @@ class AcervoActivity : AppCompatActivity() {
 
         livroAdapter.atualizarLista(listaFiltrada)
     }
+
 }
