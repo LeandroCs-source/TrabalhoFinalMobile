@@ -4,18 +4,27 @@ import android.view.LayoutInflater
 import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trabalhofinalmobile.R
 import com.example.trabalhofinalmobile.classes.Livro
 
-class LivroAdapter (val lista:MutableList<Livro>): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
+class LivroAdapter (val lista:MutableList<Livro>, private val listener: OnItemClickListener): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onEditClick(livro: Livro)
+        fun onDeleteClick(livro: Livro)
+    }
 
     inner class LivroViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val titulo: TextView = itemView.findViewById(R.id.listaTitulo)
         val autor: TextView = itemView.findViewById(R.id.listaAutor)
         val genero: TextView = itemView.findViewById(R.id.listaGenero)
         val avaliacao: TextView = itemView.findViewById(R.id.listaAvaliacao)
+        val containerEditar: LinearLayout = itemView.findViewById(R.id.containerEditar)
+        val containerExcluir: LinearLayout = itemView.findViewById(R.id.containerExcluir)
 
     }
 
@@ -35,6 +44,13 @@ class LivroAdapter (val lista:MutableList<Livro>): RecyclerView.Adapter<LivroAda
         holder.autor.text = "Autor: ${livro.autor}"
         holder.genero.text = "Gênero: ${livro.nomeGenero}"
         holder.avaliacao.text = "Avaliação: ${livro.avaliacao}"
+
+        holder.containerEditar.setOnClickListener {
+            listener.onEditClick(livro)
+        }
+        holder.containerExcluir.setOnClickListener {
+            listener.onDeleteClick(livro)
+        }
 
     }
 

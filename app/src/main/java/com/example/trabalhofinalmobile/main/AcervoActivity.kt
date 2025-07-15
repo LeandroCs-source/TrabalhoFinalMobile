@@ -1,6 +1,7 @@
 package com.example.trabalhofinalmobile.main
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,11 +26,11 @@ import com.example.trabalhofinalmobile.R
 import com.example.trabalhofinalmobile.adapter.LivroAdapter
 import com.example.trabalhofinalmobile.bancodedados.GeneroDAO
 import com.example.trabalhofinalmobile.bancodedados.LivroDAO
-import com.example.trabalhofinalmobile.classes.Genero
 import com.example.trabalhofinalmobile.classes.Livro
+import java.io.Serializable
 
 
-class AcervoActivity : AppCompatActivity() {
+class AcervoActivity : AppCompatActivity(), LivroAdapter.OnItemClickListener {
 
     private lateinit var spinnerGenero: Spinner
     private lateinit var editBuscarAutor: EditText
@@ -39,7 +41,6 @@ class AcervoActivity : AppCompatActivity() {
 
 
     private var listaTodosLivros: List<Livro> = listOf()
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,12 +59,13 @@ class AcervoActivity : AppCompatActivity() {
         botaoAdicionar = findViewById(R.id.btnCadastrarAcervo)
 
         // Inicializar adapter
-        livroAdapter = LivroAdapter(mutableListOf())
+        livroAdapter = LivroAdapter(mutableListOf(), this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = livroAdapter
 
         carregarGeneros()
         carregarLivros()
+        aplicarFiltros()
 
 
         // Filtro por autor conforme digita
@@ -83,19 +85,44 @@ class AcervoActivity : AppCompatActivity() {
         }
 
 
+        cadastrarLivroLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                carregarLivros()// Recarrega a lista após o retorno da tela de cadastro
+            }
+        }
+
         botaoAdicionar.setOnClickListener {
             val intent = Intent(this, CadastrarLivroActivity::class.java)
             cadastrarLivroLauncher.launch(intent)
         }
+    }
 
-        cadastrarLivroLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                // Recarrega a lista após o retorno da tela de cadastro
-                carregarLivros()
+    override fun onEditClick(livro: Livro) {
+        // Abre a tela para editar cadastro passando os dados do livro para edição
+        val intent = Intent(this, EditarCadastroActivity::class.java)
+        intent.putExtra("LIVRO_PARA_EDITAR", livro as Serializable) // Usa a chave para recuperar na outra tela
+        cadastrarLivroLauncher.launch(intent)
+    }
+
+    override fun onDeleteClick(livro: Livro) {
+
+        AlertDialog.Builder(this) // Cria um diálogo de confirmação para evitar exclusões acidentais
+            .setTitle("Confirmar Exclusão")
+            .setMessage("Tem certeza que deseja excluir o livro '${livro.titulo}'?")
+            .setPositiveButton("Sim") { dialog, which ->
+
+                val livroDAO = LivroDAO(this)
+
+                if (livroDAO.excluir(livro)) {
+                    Toast.makeText(this, "Livro excluído com sucesso!", Toast.LENGTH_SHORT).show()
+
+                    carregarLivros() // Recarrega a lista para refletir a exclusão na tela
+                    aplicarFiltros()
+                } else {
+                    Toast.makeText(this, "Erro ao excluir o livro.", Toast.LENGTH_SHORT).show()
+                }
             }
-        }
+            .setNegativeButton("Não", null).setIcon(android.R.drawable.ic_dialog_alert).show()// Não faz nada se clicar em "Não"
     }
 
 
@@ -115,12 +142,12 @@ class AcervoActivity : AppCompatActivity() {
 
     private fun carregarLivros() {
         val livroDAO = LivroDAO(this)
-        listaTodosLivros = livroDAO.listar() // ou seu método para buscar todos
-        //aplicarFiltros()
+        listaTodosLivros = livroDAO.listar() //lista dos livros cadastrados
+
     }
 
     private fun aplicarFiltros() {
-        val generoSelecionado = spinnerGenero.selectedItem.toString()
+        val generoSelecionado = spinnerGenero.selectedItem?.toString()
         val autorBuscado = editBuscarAutor.text.toString().trim()
 
         val listaFiltrada = listaTodosLivros.filter { livro ->
