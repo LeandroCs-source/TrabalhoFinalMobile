@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         dbHelper = UserDatabaseHelper(this)
 
-        // Texto com sublinhado
         val texto = "Primeiro acesso? Cadastre aqui"
         val spannable = SpannableString(texto)
         val inicio = texto.indexOf("Cadastre aqui")
