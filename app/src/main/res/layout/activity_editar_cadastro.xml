@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5"
+    android:background="#263238"
     tools:context=".main.EditarCadastroActivity">
 
     <TextView
@@ -14,9 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:fontFamily="@font/roboto_black"
         android:gravity="center"
         android:text="Editar Cadastro"
-        android:textColor="#212121"
+        android:textColor="#FFC107"
         android:textSize="33sp"
         android:textStyle="bold" />
 
@@ -33,10 +34,11 @@
             android:id="@+id/inputEditarTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
             android:hint="Título"
             android:padding="10dp"
             android:textSize="19sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,11 +54,12 @@
             android:id="@+id/inputEditarAutor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
             android:hint="Autor"
             android:inputType="text"
             android:padding="10dp"
             android:textSize="19sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,11 +69,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
-        android:text="Gênero"
-        android:textStyle="bold"
-        android:textSize="19sp"
+        android:fontFamily="@font/roboto_black"
+        android:padding="10dp"
         android:paddingStart="12dp"
-        android:padding="10dp"/>
+        android:text="Gênero"
+        android:textColor="#B0BEC5"
+        android:textSize="19sp"
+        android:textStyle="bold" />
 
     <Spinner
         android:id="@+id/spinnerEditarGenero"
@@ -86,11 +91,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
-        android:text="Avaliação"
-        android:textStyle="bold"
-        android:textSize="19sp"
+        android:fontFamily="@font/roboto_black"
+        android:padding="10dp"
         android:paddingStart="12dp"
-        android:padding="10dp"/>
+        android:text="Avaliação"
+        android:textColor="#B0BEC5"
+        android:textSize="19sp"
+        android:textStyle="bold" />
 
     <Spinner
         android:id="@+id/spinnerEditarAvalicacao"
@@ -103,24 +110,28 @@
     <Button
         android:id="@+id/btnEditarLivro"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="50dp"
         android:layout_marginHorizontal="70dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="#FFC107"
+        android:fontFamily="@font/roboto_black"
         android:text="Editar"
-        android:textColor="#263238"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:cornerRadius="20px" />
 
     <Button
         android:id="@+id/btnEditarVoltar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="50dp"
         android:layout_marginHorizontal="70dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#FFC107"
+        android:fontFamily="@font/roboto_black"
         android:text="Voltar"
-        android:textColor="#263238"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:cornerRadius="20px" />
 
 
 </LinearLayout>
