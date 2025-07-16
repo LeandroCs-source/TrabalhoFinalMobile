@@ -108,27 +108,25 @@
         android:id="@+id/btnEditarLivro"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="70dp"
+        android:layout_marginHorizontal="90dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="#FFC107"
-        android:fontFamily="@font/roboto_black"
         android:text="Editar"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:cornerRadius="20px" />
+        app:cornerRadius="50px" />
 
     <Button
         android:id="@+id/btnEditarVoltar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="70dp"
+        android:layout_marginHorizontal="90dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="#FFC107"
-        android:fontFamily="@font/roboto_black"
         android:text="Voltar"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:cornerRadius="20px" />
+        app:cornerRadius="50px" />
 
 
 </LinearLayout>

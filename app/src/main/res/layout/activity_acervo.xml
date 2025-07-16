@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#263238"
+    android:background="#F5F5F5"
     tools:context=".main.AcervoActivity">
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto_black"
         android:text="Escolha a forma de busca"
-        android:textColor="#B0BEC5"
+        android:textColor="#627275"
         android:textSize="17sp"
         android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto_light"
         android:text="Selecione o Gênero"
-        android:textColor="#B0BEC5"
+        android:textColor="#627275"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -59,12 +59,12 @@
         android:fontFamily="@font/roboto_light"
         android:hint="Buscar por autor"
         android:inputType="text"
-        android:textColorHint="#B0BEC5" />
+        android:textColorHint="#627275" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerLivros"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="311dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1" />
 
@@ -77,6 +77,6 @@
         android:text="Cadastrar Livro"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:cornerRadius="20px" />
+        app:cornerRadius="50px" />
 
 </LinearLayout>

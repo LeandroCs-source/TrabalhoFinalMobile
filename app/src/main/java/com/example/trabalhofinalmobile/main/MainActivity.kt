@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
         binding.textCadastroUsuario.text = spannable
 
         binding.btnLogin.setOnClickListener {
-            val email = binding.textEmailLogin.text.toString().trim()
-            val senha = binding.textSenha.text.toString().trim()
+            val email = binding.inputLoginEmail.text.toString().trim()
+            val senha = binding.inputLoginSenha.text.toString().trim()
 
             if (email.isEmpty() || senha.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
