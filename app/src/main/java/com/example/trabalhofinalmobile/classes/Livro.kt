@@ -1,7 +1,9 @@
 package com.example.trabalhofinalmobile.classes
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Livro(
     val idLivro : Int,
     val titulo : String,
@@ -9,4 +11,4 @@ data class Livro(
     val avaliacao : Int,
     val idGenero : Int,
     val nomeGenero: String
-):Serializable // usando para transmitir informações entre as activitys para fazer as edições
+): Parcelable // usando para transmitir informações entre as activitys para fazer as edições

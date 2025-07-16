@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#263238"
+    android:background="#F5F5F5"
     tools:context=".main.EditarCadastroActivity">
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginTop="60dp"
         android:fontFamily="@font/roboto_black"
         android:gravity="center"
-        android:text="Editar Cadastro"
+        android:text="Editar Livro"
         android:textColor="#FFC107"
         android:textSize="33sp"
         android:textStyle="bold" />
@@ -73,9 +73,8 @@
         android:padding="10dp"
         android:paddingStart="12dp"
         android:text="Gênero"
-        android:textColor="#B0BEC5"
-        android:textSize="19sp"
-        android:textStyle="bold" />
+        android:textColor="#627275"
+        android:textSize="19sp" />
 
     <Spinner
         android:id="@+id/spinnerEditarGenero"
@@ -95,9 +94,7 @@
         android:padding="10dp"
         android:paddingStart="12dp"
         android:text="Avaliação"
-        android:textColor="#B0BEC5"
-        android:textSize="19sp"
-        android:textStyle="bold" />
+        android:textSize="19sp" />
 
     <Spinner
         android:id="@+id/spinnerEditarAvalicacao"

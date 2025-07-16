@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#263238"
+    android:background="#F5F5F5"
     app:layoutDescription="@xml/activity_cadastro_livro_scene"
     tools:context=".main.CadastrarLivroActivity">
 
@@ -77,9 +77,8 @@
         android:padding="10dp"
         android:paddingStart="10dp"
         android:text="Gênero"
-        android:textColor="#B0BEC5"
-        android:textSize="19sp"
-        android:textStyle="bold" />
+        android:textColor="#627275"
+        android:textSize="19sp" />
 
     <Spinner
         android:id="@+id/spinnerCadastroGenero"
@@ -100,9 +99,8 @@
         android:padding="10dp"
         android:paddingStart="10dp"
         android:text="Avaliação"
-        android:textColor="#B0BEC5"
-        android:textSize="19sp"
-        android:textStyle="bold" />
+        android:textColor="#627275"
+        android:textSize="19sp" />
 
     <Spinner
         android:id="@+id/spinnerCadastroAvalicacao"

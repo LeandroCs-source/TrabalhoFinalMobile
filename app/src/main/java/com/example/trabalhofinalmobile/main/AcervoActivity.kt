@@ -31,13 +31,13 @@ import java.io.Serializable
 
 
 class AcervoActivity : AppCompatActivity(), LivroAdapter.OnItemClickListener {
-
+    //declaração das variáveis
     private lateinit var spinnerGenero: Spinner
     private lateinit var editBuscarAutor: EditText
     private lateinit var recyclerView: RecyclerView
     private lateinit var livroAdapter: LivroAdapter
     private lateinit var botaoAdicionar: Button
-    private lateinit var cadastrarLivroLauncher: ActivityResultLauncher<Intent>
+    private lateinit var livroLauncher: ActivityResultLauncher<Intent>
 
 
     private var listaTodosLivros: List<Livro> = listOf()
@@ -53,22 +53,26 @@ class AcervoActivity : AppCompatActivity(), LivroAdapter.OnItemClickListener {
             insets
         }
 
+        //inicialização das variáveis a partir da tela
         spinnerGenero = findViewById(R.id.spinnerGenero)
         editBuscarAutor = findViewById(R.id.editBuscarAutor)
         recyclerView = findViewById(R.id.recyclerLivros)
         botaoAdicionar = findViewById(R.id.btnCadastrarAcervo)
 
-        // Inicializar adapter
+        // Inicialização do Adapter
         livroAdapter = LivroAdapter(mutableListOf(), this)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = livroAdapter
+        recyclerView.adapter = livroAdapter //conexão do recyclerview com a classe Adapter
 
+        //carregamentos dos dados a partir do banco de dados
         carregarGeneros()
         carregarLivros()
+
+        //aplicação dos filtros
         aplicarFiltros()
 
 
-        // Filtro por autor conforme digita
+        // Filtro por autor conforme digitado
         editBuscarAutor.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) = aplicarFiltros()
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -85,23 +89,26 @@ class AcervoActivity : AppCompatActivity(), LivroAdapter.OnItemClickListener {
         }
 
 
-        cadastrarLivroLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        //retorna da activity de cadastro se o cadastro foi realizado
+        livroLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 carregarLivros()// Recarrega a lista após o retorno da tela de cadastro
+                aplicarFiltros()
             }
         }
 
+        //ação do botão que direciona para tela de cadastro
         botaoAdicionar.setOnClickListener {
             val intent = Intent(this, CadastrarLivroActivity::class.java)
-            cadastrarLivroLauncher.launch(intent)
+            livroLauncher.launch(intent)
         }
     }
 
     override fun onEditClick(livro: Livro) {
         // Abre a tela para editar cadastro passando os dados do livro para edição
         val intent = Intent(this, EditarCadastroActivity::class.java)
-        intent.putExtra("LIVRO_PARA_EDITAR", livro as Serializable) // Usa a chave para recuperar na outra tela
-        cadastrarLivroLauncher.launch(intent)
+        intent.putExtra("livro", livro) // Usa a chave para recuperar na outra tela
+        livroLauncher.launch(intent)
     }
 
     override fun onDeleteClick(livro: Livro) {

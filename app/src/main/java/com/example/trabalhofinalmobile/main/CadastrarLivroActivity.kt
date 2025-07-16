@@ -1,5 +1,6 @@
 package com.example.trabalhofinalmobile.main
 
+import android.app.Activity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -63,7 +64,7 @@ class CadastrarLivroActivity : AppCompatActivity() {
             idLivro = 0,
             titulo = titulo,
             autor = autor,
-            avaliacao = avaliacaoSelecionada,
+            avaliacao = avaliacaoSelecionada + 1,
             idGenero = genero.idGenero,
             nomeGenero = genero.nomeGenero
         )
@@ -73,6 +74,7 @@ class CadastrarLivroActivity : AppCompatActivity() {
 
         if (salvar) {
             Toast.makeText(this, "Livro cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
+            setResult(Activity.RESULT_OK)
             limparCampos()
         } else {
             Toast.makeText(this, "Erro ao cadastrar o livro", Toast.LENGTH_SHORT).show()
