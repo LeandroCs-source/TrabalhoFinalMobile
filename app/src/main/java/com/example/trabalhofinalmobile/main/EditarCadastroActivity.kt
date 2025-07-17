@@ -99,7 +99,6 @@ class EditarCadastroActivity : AppCompatActivity() {
             Toast.makeText(this, "Livro atualizado com sucesso!", Toast.LENGTH_SHORT).show()
             // Retorna um resultado OK para a tela anterior saber que a atualização ocorreu
             setResult(Activity.RESULT_OK)
-            finish()
         } else {
             Toast.makeText(this, "Erro ao atualizar o livro.", Toast.LENGTH_SHORT).show()
         }
