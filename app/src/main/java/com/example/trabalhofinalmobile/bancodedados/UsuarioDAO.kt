@@ -26,7 +26,7 @@ class UsuarioDAO(context: Context) {
         return retorno
     }
 
-    //função para autenticar que e-mail e usuário
+    //função para autenticar e-mail e usuário
     fun autenticar( usuario:String, senha:String): Boolean{
 
         val sql = "select * from usuario where usuario = '${usuario}' and senha ='${senha}';"
@@ -39,6 +39,19 @@ class UsuarioDAO(context: Context) {
         }catch (e:SQLException){
             Log.i("info_bd", "Erro ao autenticar!")
             return false
+        }
+    }
+    //função para verificar se já existe algum usuário com o mesmo e-mail
+    fun verificarUsuarioExistente(usuario: String): Boolean {
+        val sql = "SELECT * FROM usuario WHERE usuario = '$usuario';"
+        return try {
+            val cursor = leitura.rawQuery(sql, null)
+            val existe = cursor.count > 0
+            cursor.close()
+            existe
+        } catch (e: SQLException) {
+            Log.i("info_bd", "Erro ao verificar existência do usuário!")
+            false
         }
     }
 

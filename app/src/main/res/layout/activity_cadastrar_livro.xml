@@ -18,7 +18,7 @@
         android:fontFamily="@font/roboto_black"
         android:gravity="center"
         android:text="Cadastro Livro"
-        android:textColor="#FFC107"
+        android:textColor="#15364D"
         android:textSize="33sp"
         android:textStyle="bold" />
 
