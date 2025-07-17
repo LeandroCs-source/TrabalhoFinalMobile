@@ -6,9 +6,12 @@ import com.example.trabalhofinalmobile.classes.Usuario
 import java.sql.SQLException
 
 class UsuarioDAO(context: Context) {
+
+    //variaveis de escrita e leitura do banco
     val escrita = BancoDadosHelper(context).writableDatabase
     val leitura = BancoDadosHelper(context).readableDatabase
 
+    //função para salvar os dados do usuário na tabela usuário
     fun salvar(usuario: Usuario): Boolean{
 
         var retorno = false
@@ -23,6 +26,7 @@ class UsuarioDAO(context: Context) {
         return retorno
     }
 
+    //função para autenticar que e-mail e usuário
     fun autenticar( usuario:String, senha:String): Boolean{
 
         val sql = "select * from usuario where usuario = '${usuario}' and senha ='${senha}';"

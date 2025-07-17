@@ -7,16 +7,19 @@ import java.sql.SQLException
 
 class LivroDAO (context: Context) {
 
+    //variaveis de escrita e leitura do banco
     val escrita = BancoDadosHelper(context).writableDatabase
     val leitura = BancoDadosHelper(context).readableDatabase
 
+    //função para salvar os dados do livro no banco de dados
     fun salvar(livro: Livro):Boolean{
 
         var retorno = false
+        //sentença sql para inserir os dados
         val sql = "insert into livro values (null, '${livro.titulo}', '${livro.autor}', ${livro.avaliacao}, ${livro.idGenero});"
 
         try {
-            escrita.execSQL(sql)
+            escrita.execSQL(sql) // os dados são salvos no banco
             retorno = true
         }catch (e: SQLException){
             Log.i("info_bd", "Erro ao salvar!")
@@ -24,9 +27,11 @@ class LivroDAO (context: Context) {
         return retorno
     }
 
+    //função para editar os dados no banco
     fun editar(livro: Livro):Boolean{
 
         var retorno = false
+
         val sql = "update livro set titulo = '${livro.titulo}', autor = '${livro.autor}', avaliacao = ${livro.avaliacao}, " +
                 "idGenero = ${livro.idGenero} where idLivro = ${livro.idLivro};"
 
@@ -39,6 +44,7 @@ class LivroDAO (context: Context) {
         return retorno
     }
 
+    //função para excluir dados do banco
     fun excluir(livro: Livro): Boolean{
 
         val sql = "delete from livro where idLivro = ${livro.idLivro};"
@@ -52,15 +58,18 @@ class LivroDAO (context: Context) {
         return true
     }
 
+    //função para retornar todos os livros cadastrados no banco
     fun listar():List<Livro>{
 
+        //lista para armazenar os dados
         val listaLivro = mutableListOf<Livro>()
+
         val sql = " select livro.idLivro, livro.titulo, livro.autor, livro.avaliacao, livro.idGenero, genero.nomeGenero " +
                 "from livro inner join genero on livro.idGenero = genero.idGenero;"
 
 
         try{
-            val cursor = leitura.rawQuery(sql, null)
+            val cursor = leitura.rawQuery(sql, null)//leitura do banco de dados
 
             while(cursor.moveToNext()){
                 val idLivro = cursor.getInt(0)
@@ -70,11 +79,13 @@ class LivroDAO (context: Context) {
                 val genero = cursor.getInt(4)
                 val nomeGenero = cursor.getString(5)
 
+                //adiciona os dados a lista criada
                 listaLivro.add(Livro(idLivro, titulo, autor, avaliacao, genero, nomeGenero))
             }
         }catch (e:SQLException){
             Log.i("info_bd", "Erro ao listar livros!")
         }
+        //retorno da lista criada
         return listaLivro
     }
 }

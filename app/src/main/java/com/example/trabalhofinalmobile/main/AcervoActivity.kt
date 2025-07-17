@@ -133,12 +133,18 @@ class AcervoActivity : AppCompatActivity(), LivroAdapter.OnItemClickListener {
     }
 
 
+    //função para buscar gêneros do banco de dados
     private fun carregarGeneros() {
-        val generoDAO = GeneroDAO(this)
-        val listaGeneros = generoDAO.listar()
-        val nomesGeneros = mutableListOf("Todos os Gêneros")
+
+        val generoDAO = GeneroDAO(this)//criação de objeto Gênero
+
+        val listaGeneros = generoDAO.listar() //lista dos gêneros presente no banco
+
+        val nomesGeneros = mutableListOf("Todos os Gêneros")//cria uma lista para guardas os dados retornados
+
         nomesGeneros.addAll(listaGeneros.map { it.nomeGenero })
 
+        //utilização do Adapter para preencher o campo do spinner de Gênero
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, nomesGeneros)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerGenero.adapter = adapter
@@ -147,13 +153,16 @@ class AcervoActivity : AppCompatActivity(), LivroAdapter.OnItemClickListener {
         spinnerGenero.setSelection(0)
     }
 
+    //função para buscar os livros presentes no banco
     private fun carregarLivros() {
         val livroDAO = LivroDAO(this)
         listaTodosLivros = livroDAO.listar() //lista dos livros cadastrados
 
     }
 
+    //função que aplica os filtros de Gênero e Autor
     private fun aplicarFiltros() {
+
         val generoSelecionado = spinnerGenero.selectedItem?.toString()
         val autorBuscado = editBuscarAutor.text.toString().trim()
 
@@ -162,7 +171,7 @@ class AcervoActivity : AppCompatActivity(), LivroAdapter.OnItemClickListener {
             val combinaAutor = autorBuscado.isBlank() || livro.autor.contains(autorBuscado, ignoreCase = true)
             combinaGenero && combinaAutor
         }
-
+        //atualização da lista na tela
         livroAdapter.atualizarLista(listaFiltrada)
     }
 

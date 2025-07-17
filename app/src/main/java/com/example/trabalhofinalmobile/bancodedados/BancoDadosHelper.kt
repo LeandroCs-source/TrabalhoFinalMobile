@@ -29,11 +29,12 @@ class BancoDadosHelper (context:Context):SQLiteOpenHelper (context, "EstanteInte
                 "avaliacao integer not null, idGenero integer not null, foreign key (idGenero) references genero(idGenero));"
 
         try {
+            //executa a criação das tabelas no banco
             db?.execSQL(sqlUsuario)
             db?.execSQL(sqlGenero)
             db?.execSQL(sqlLivro)
 
-            // Inserir gêneros iniciais
+            // Insere gêneros iniciais para preencher o spinner de gêneros
             val generosIniciais = listOf("Romance", "Fantasia", "Ficção Científica", "Suspense", "Aventura")
             generosIniciais.forEach { genero ->
                 db?.execSQL("insert into genero (nomeGenero) values ('$genero')")

@@ -21,6 +21,7 @@ class CadastrarLivroActivity : AppCompatActivity() {
         ActivityCadastrarLivroBinding.inflate(layoutInflater)
     }
 
+    //criação da lista para guardar os gêneros
     private var listaGeneros: List<Genero> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,33 +34,38 @@ class CadastrarLivroActivity : AppCompatActivity() {
             insets
         }
 
+        //carregamentos dos dados a partir do banco de dados
         carregarGeneros()
+        //preenchimento do spinner de avaliação
         configurarSpinnerAvaliacao()
 
+        //botão para cadastrar um novo livro
         binding.btnCadastrarLivro.setOnClickListener{
             cadastrarLivro()
         }
 
+        //botão para retornar a tela principal
         binding.btnVoltarLivro.setOnClickListener{
             finish()
         }
     }
 
+    //função para cadastrar um novo livro
     private fun cadastrarLivro() {
-
+        //leitura dos dados da activity
         val idLivro = -1
         val titulo = binding.inputCadastroTitulo.text.toString().trim()
         val autor = binding.inputCadastroAutor.text.toString().trim()
         val generoSelecionado = binding.spinnerCadastroGenero.selectedItemPosition
         val avaliacaoSelecionada = binding.spinnerCadastroAvalicacao.selectedItemPosition.toString().toInt()
+        val genero = listaGeneros[generoSelecionado]
 
+        //verificação de campos vazios
         if(titulo.isEmpty() || autor.isEmpty()){
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
             return
         }
-
-        val genero = listaGeneros[generoSelecionado]
-
+        //criação de um objeto Livro
         val novoLivro = Livro(
             idLivro = 0,
             titulo = titulo,
@@ -69,7 +75,9 @@ class CadastrarLivroActivity : AppCompatActivity() {
             nomeGenero = genero.nomeGenero
         )
 
+        //criação de um objeto DAO para realizar o cadastro no banco
         val livroDAO = LivroDAO(this)
+
         val salvar = livroDAO.salvar(novoLivro)
 
         if (salvar) {
@@ -82,6 +90,7 @@ class CadastrarLivroActivity : AppCompatActivity() {
 
     }
 
+    //função para limpar os campos após o cadastro
     private fun limparCampos() {
         binding.inputCadastroTitulo.setText("")
         binding.inputCadastroAutor.setText("")
@@ -89,6 +98,7 @@ class CadastrarLivroActivity : AppCompatActivity() {
         binding.spinnerCadastroAvalicacao.setSelection(0)
     }
 
+    //função para configurar os valores das avaliações no spinner
     private fun configurarSpinnerAvaliacao() {
         val avaliacoes = listOf("1", "2", "3", "4", "5")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, avaliacoes)
@@ -98,6 +108,7 @@ class CadastrarLivroActivity : AppCompatActivity() {
         binding.spinnerCadastroAvalicacao.adapter = adapter
     }
 
+    //função para carregar os gêneros no spinner Gêneros
     private fun carregarGeneros() {
         val generoDAO = GeneroDAO(this)
         listaGeneros = generoDAO.listar()

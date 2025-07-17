@@ -13,11 +13,13 @@ import com.example.trabalhofinalmobile.classes.Livro
 
 class LivroAdapter (val lista:MutableList<Livro>, private val listener: OnItemClickListener): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
 
+    //interface para ser possível o clique nos botões de editar e excluir
     interface OnItemClickListener {
         fun onEditClick(livro: Livro)
         fun onDeleteClick(livro: Livro)
     }
 
+    //declaração das váriaveis
     inner class LivroViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val titulo: TextView = itemView.findViewById(R.id.listaTitulo)
         val autor: TextView = itemView.findViewById(R.id.listaAutor)
@@ -28,16 +30,19 @@ class LivroAdapter (val lista:MutableList<Livro>, private val listener: OnItemCl
 
     }
 
+    //conexão com as activitys
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LivroViewHolder {
         val layouInflater = LayoutInflater.from(parent.context)
         val itemView = layouInflater.inflate(R.layout.lista_de_livros, parent, false)
         return LivroViewHolder(itemView)
     }
 
+    //retorna o tamanho da lista
     override fun getItemCount(): Int {
         return lista.size
     }
 
+    //função para preencher o RecyclerView com os dados que serão apresentados
     override fun onBindViewHolder(holder: LivroViewHolder, position: Int) {
         val livro = lista[position]
         holder.titulo.text = livro.titulo
@@ -54,6 +59,7 @@ class LivroAdapter (val lista:MutableList<Livro>, private val listener: OnItemCl
 
     }
 
+    //função para atualizar a lista
     fun atualizarLista(novaLista: List<Livro>) {
         lista.clear()
         lista.addAll(novaLista)
