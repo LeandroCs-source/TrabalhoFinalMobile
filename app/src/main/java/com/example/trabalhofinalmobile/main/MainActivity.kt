@@ -50,6 +50,9 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            binding.inputLoginEmail.text?.clear()
+            binding.inputLoginSenha.text?.clear()
         }
 
         // Redirecionamento para a tela de cadastro do usuário

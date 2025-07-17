@@ -72,9 +72,20 @@
         android:id="@+id/btnCadastrarAcervo"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="60dp"
+        android:layout_marginHorizontal="90dp"
         android:backgroundTint="#FFC107"
         android:text="Cadastrar Livro"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:cornerRadius="50px" />
+
+    <Button
+        android:id="@+id/btnCadastrarSair"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="90dp"
+        android:backgroundTint="#FFC107"
+        android:text="Sair"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:cornerRadius="50px" />

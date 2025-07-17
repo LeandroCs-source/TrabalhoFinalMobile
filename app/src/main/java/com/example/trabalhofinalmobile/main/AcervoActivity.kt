@@ -37,6 +37,7 @@ class AcervoActivity : AppCompatActivity(), LivroAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var livroAdapter: LivroAdapter
     private lateinit var botaoAdicionar: Button
+    private lateinit var botaoSair: Button
     private lateinit var livroLauncher: ActivityResultLauncher<Intent>
 
 
@@ -58,6 +59,7 @@ class AcervoActivity : AppCompatActivity(), LivroAdapter.OnItemClickListener {
         editBuscarAutor = findViewById(R.id.editBuscarAutor)
         recyclerView = findViewById(R.id.recyclerLivros)
         botaoAdicionar = findViewById(R.id.btnCadastrarAcervo)
+        botaoSair = findViewById(R.id.btnCadastrarSair)
 
         // Inicialização do Adapter
         livroAdapter = LivroAdapter(mutableListOf(), this)
@@ -101,6 +103,11 @@ class AcervoActivity : AppCompatActivity(), LivroAdapter.OnItemClickListener {
         botaoAdicionar.setOnClickListener {
             val intent = Intent(this, CadastrarLivroActivity::class.java)
             livroLauncher.launch(intent)
+        }
+
+        botaoSair.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
